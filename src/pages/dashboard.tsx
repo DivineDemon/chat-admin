@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { DollarSign } from "lucide-react";
 
-import DataBar from "@/components/dashboard/data-bar";
+import DateRangePicker from "@/components/date-range-picker";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Dashboard = () => {
@@ -10,7 +10,10 @@ const Dashboard = () => {
 
   return (
     <div className="flex h-full w-full flex-col items-start justify-start gap-5">
-      <span className="w-full text-left text-3xl font-bold">Dashboard</span>
+      <div className="flex w-full items-center justify-center">
+        <span className="flex-1 text-left text-3xl font-bold">Dashboard</span>
+        <DateRangePicker />
+      </div>
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -39,11 +42,6 @@ const Dashboard = () => {
             </div>
           </div>
         ))}
-      </div>
-      <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-2">
-        <div className="col-span-1 h-full w-full">
-          <DataBar />
-        </div>
       </div>
     </div>
   );
