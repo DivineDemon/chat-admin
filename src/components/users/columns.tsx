@@ -2,6 +2,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowDown, ArrowUpDown } from "lucide-react";
 
+import { cn } from "@/lib/utils";
+
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -28,7 +30,7 @@ export const columns: ColumnDef<UserProps>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-center gap-2.5 font-medium">
+        <div className="flex items-center justify-start gap-2.5 font-medium">
           <img
             src={
               row.original.image
@@ -38,9 +40,28 @@ export const columns: ColumnDef<UserProps>[] = [
             alt="user-dp"
             className="size-6 rounded-full"
           />
-          <span className="hidden flex-1 overflow-hidden truncate md:flex">
+          <span className="hidden overflow-hidden truncate md:flex">
             {row.getValue("email")}
           </span>
+          <div
+            className={cn(
+              "relative inline-block size-3 rounded-full bg-green-500",
+              {
+                "bg-green-500": row.getValue("isActive"),
+                "bg-red-500": !row.getValue("isActive"),
+              }
+            )}
+          >
+            <div
+              className={cn(
+                "absolute inset-0 size-3 animate-ping rounded-full",
+                {
+                  "bg-green-500": row.getValue("isActive"),
+                  "bg-red-500": !row.getValue("isActive"),
+                }
+              )}
+            />
+          </div>
         </div>
       );
     },
