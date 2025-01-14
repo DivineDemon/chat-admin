@@ -18,3 +18,11 @@ declare type PlanProps = {
   trend: string;
   bgColor: string;
 };
+
+declare type UserProps = {
+  id: number;
+  plan: string;
+  email: string;
+  image: string;
+  isActive: boolean;
+};
