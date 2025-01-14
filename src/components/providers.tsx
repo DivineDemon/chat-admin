@@ -14,6 +14,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
       domain={`${import.meta.env.VITE_KINDE_AUTH_DOMAIN}`}
       logoutUri={window.location.origin}
       redirectUri={`${window.location.origin}/dashboard`}
+      isDangerouslyUseLocalStorage={true}
     >
       <ThemeProvider>
         <BrowserRouter>
