@@ -11,7 +11,7 @@ const DataLine = () => {
   return (
     <ChartContainer
       config={planChartConfig}
-      className="max-h-[calc(100vh-300px)] w-full rounded-lg border p-2.5"
+      className="max-h-[calc(100vh-320px)] w-full rounded-lg border p-2.5"
     >
       <LineChart
         accessibilityLayer

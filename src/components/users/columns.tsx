@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useState } from "react";
+
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowDown, ArrowUpDown } from "lucide-react";
+import { ArrowDown, ArrowUpDown, EllipsisVertical } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -8,11 +10,14 @@ import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Switch } from "../ui/switch";
+import WarningModal from "../warning-modal";
+import AddUser from "./add-user";
 
 export const columns: ColumnDef<UserProps>[] = [
   {
@@ -141,5 +146,47 @@ export const columns: ColumnDef<UserProps>[] = [
         {row.getValue("plan")}
       </span>
     ),
+  },
+  {
+    id: "actions",
+    header: "Actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const [warn, setWarn] = useState<boolean>(false);
+      const [open, setOpen] = useState<boolean>(false);
+      const [message, setMessage] = useState<string>("");
+      const [selected, setSelected] = useState<string>("");
+
+      return (
+        <>
+          <AddUser id={parseInt(selected)} open={open} setOpen={setOpen} />
+          <WarningModal open={warn} setOpen={setWarn} message={message} />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <EllipsisVertical />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="mr-5 w-auto">
+              <DropdownMenuItem
+                onClick={() => {
+                  setSelected(`${row.getAllCells()[0].row.original.id}`);
+                  setOpen(true);
+                }}
+              >
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  setSelected(`${row.getAllCells()[0].row.original.id}`);
+                  setMessage("delete this user");
+                  setWarn(true);
+                }}
+              >
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
+      );
+    },
   },
 ];
