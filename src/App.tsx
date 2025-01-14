@@ -4,6 +4,8 @@ import Layout from "./components/layout";
 import RouteGuard from "./components/route-guard";
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/login";
+import Plans from "./pages/plans";
+import Users from "./pages/users";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
         }
       >
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/plans" element={<Plans />} />
       </Route>
     </Routes>
   );

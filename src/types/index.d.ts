@@ -9,3 +9,12 @@ declare type BaseStatsProps = {
     Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
   >;
 };
+
+declare type PlanProps = {
+  id: number;
+  name: string;
+  price: number;
+  users: number;
+  trend: string;
+  bgColor: string;
+};
